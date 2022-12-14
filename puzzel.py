@@ -14,17 +14,46 @@ def init_puzzle():
     return shuffledPuzzle
 
 
-# To print the 8-puzzel to the console
+# To print the puzzle to the console
 def print_puzzle(puzzleToPrint):
     for i in range(3):
-        print(' +--------------+ ')
+        print(' +---+---+---+')
         for j in range(3):
             if puzzleToPrint[i][j] == 0:
-                print(' | ', ' ', end='')
+                print(' |', ' ', end='')
             else:
-                print(' | ', puzzleToPrint[i][j], end='')
-        print(' | ')
-    print(' +--------------+ ')
+                print(' |', puzzleToPrint[i][j], end='')
+        print(' |')
+    print(' +---+---+---+')
+
+
+def find_empty(puzzle):
+    row = 0
+    col = 0
+
+    for i in range(3):
+        for j in range(3):
+            if puzzle[i][j] == 0:
+                row = i
+                col = j
+    return row, col
+
+
+def puzzle_inorder(puzzle):
+    # Make array to compare to
+    puzzleInOrder = np.arange(9)
+    # reshape puzzle to array
+    puzzle = puzzle.reshape(9)
+    # make boolean value for return statement & set to true (1) as a start value
+    inOrder = 1
+
+    print(puzzle, '==', puzzleInOrder)  # only for now to check the function
+
+    for i in puzzleInOrder:
+        if puzzle[i] != puzzleInOrder[i]:
+            inOrder = 0
+            break
+    return bool(inOrder == 1)
 
 
 """
@@ -48,3 +77,5 @@ def move_tile(puzzle, direction):
 if __name__ == '__main__':
     p = init_puzzle()
     print_puzzle(p)
+    print(puzzle_inorder(p))
+    print(find_empty(p))
