@@ -5,7 +5,7 @@ import numpy as np
 # Define a function to initialize the puzzle
 def init_puzzle():
     puzzle = np.arange(9)  # Create a array to represent the puzzle
-    np.random.shuffle(puzzle)   # Shuffle the puzzle to create a random starting configuration
+    #np.random.shuffle(puzzle)  # Shuffle the puzzle to create a random starting configuration
 
     # Shape the array into a 2D array AFTER it was shuffled to assure rows and cols get mixed
     shuffledPuzzle = puzzle.reshape((3, 3))
@@ -54,32 +54,36 @@ def puzzle_inorder(puzzle):
 
 # Define a function to move a tile in the puzzle
 def move_tile(puzzle, direction):
+    move = 1  # create variable to save if a move was possible 1->possible 0->not possible
     empty_row, empty_col = find_empty(puzzle)[0], find_empty(puzzle)[1]  # Get the position of the empty tile
 
     # Move the empty tile in the specified direction up & down change the row, left & right change the col
     if direction == "up" and empty_row > 0:
         puzzle[empty_row][empty_col] = puzzle[empty_row - 1][empty_col]
         puzzle[empty_row - 1][empty_col] = 0
-        print_puzzle(puzzle)
+        # print_puzzle(puzzle)
 
     elif direction == "down" and empty_row < 2:
         puzzle[empty_row][empty_col] = puzzle[empty_row + 1][empty_col]
         puzzle[empty_row + 1][empty_col] = 0
-        print_puzzle(puzzle)
+        # print_puzzle(puzzle)
 
     elif direction == "left" and empty_col > 0:
         puzzle[empty_row][empty_col] = puzzle[empty_row][empty_col - 1]
         puzzle[empty_row][empty_col - 1] = 0
-        print_puzzle(puzzle)
+        # print_puzzle(puzzle)
 
     elif direction == "right" and empty_col < 2:
         puzzle[empty_row][empty_col] = puzzle[empty_row][empty_col + 1]
         puzzle[empty_row][empty_col + 1] = 0
-        print_puzzle(puzzle)
+        # print_puzzle(puzzle)
     else:
-        print('move not possible')
+        # print('move not possible')
+        move = 0
+    return move
 
 
+# maybe add function to count how many tiles are already at a correct position?
 # To test the functions
 if __name__ == '__main__':
     p = init_puzzle()
