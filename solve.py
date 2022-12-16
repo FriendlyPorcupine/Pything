@@ -15,10 +15,11 @@ def random_solve(unsolvedPuzzle):
         if countMoves >= 100:  # stop the while loop if the puzzle is not solved after 200 valid moves
             countMoves = 0
             return countMoves
-
     return countMoves
 
 
+# To test the functions
+"""
 if __name__ == '__main__':
     puzzle = p.init_puzzle()  # init_puzzle function must not shuffle
     p.move_tile(puzzle, 'down')  # Make puzzle with just one wrong tile
@@ -27,3 +28,5 @@ if __name__ == '__main__':
 
     print(movesToSolve, 'moves were necessary to solve the puzzle')
     p.print_puzzle(puzzle)
+"""
+

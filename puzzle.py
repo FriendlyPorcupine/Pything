@@ -5,7 +5,7 @@ import numpy as np
 # Define a function to initialize the puzzle
 def init_puzzle():
     puzzle = np.arange(9)  # Create a array to represent the puzzle
-    #np.random.shuffle(puzzle)  # Shuffle the puzzle to create a random starting configuration
+    np.random.shuffle(puzzle)  # Shuffle the puzzle to create a random starting configuration
 
     # Shape the array into a 2D array AFTER it was shuffled to assure rows and cols get mixed
     shuffledPuzzle = puzzle.reshape((3, 3))
@@ -85,9 +85,12 @@ def move_tile(puzzle, direction):
 
 # maybe add function to count how many tiles are already at a correct position?
 # To test the functions
+"""
 if __name__ == '__main__':
     p = init_puzzle()
-    # print_puzzle(p)
-    # print(puzzle_inorder(p))
-    # print(find_empty(p))
-    # move_tile(p, "right")
+    print_puzzle(p)
+    print(puzzle_inorder(p))
+    print(find_empty(p))
+    move_tile(p, "right")
+"""
+
