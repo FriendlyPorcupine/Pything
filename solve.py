@@ -10,7 +10,7 @@ def random_solve(unsolvedPuzzle):
 
     while p.puzzle_inorder(unsolvedPuzzle) != 1:  # Loop until the puzzle is solved
         direction = np.random.choice(directions)  # Choose random direction to move the empty tile
-        if p.move_tile(unsolvedPuzzle, direction) == 1:  # if move is valid count, increment countMoves
+        if p.move_tile(unsolvedPuzzle, direction):  # if move is True count, increment countMoves
             countMoves += 1
         if countMoves >= 100:  # stop the while loop if the puzzle is not solved after 200 valid moves
             countMoves = 0
