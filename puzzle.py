@@ -9,6 +9,9 @@ def init_puzzle():
     puzzle = np.arange(9)  # Create a array to represent the puzzle
     np.random.shuffle(puzzle)  # Shuffle the puzzle to create a random starting configuration
 
+    while not puzzle_solvable(puzzle):  # check if the puzzle is solvable
+        puzzle = init_puzzle()  # recursive call of init_puzzle to make new puzzle and check if new is solvable
+
     # Shape the array into a 2D array AFTER it was shuffled to assure rows and cols get mixed
     return puzzle.reshape((3, 3))
 
@@ -92,8 +95,17 @@ def puzzle_solvable(puzzle):
                 inverseCount += 1  # if the 1st number is bigger than the 2nd number, increase counter
     return bool((inverseCount % 2) == 0)  # if the counter is a even the puzzle is solvable
 
+
 # maybe add function to count how many tiles are already at a correct position?
 # To test the functions
 
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
+    """
+    k = 0
+    while k < 600:
+        p = init_puzzle()
+        print(p.reshape(9), ':', puzzle_solvable(p))
+        k += 1
+    """
+
