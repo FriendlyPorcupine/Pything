@@ -101,11 +101,9 @@ def puzzle_solvable(puzzle):
 
 
 if __name__ == '__main__':
-    """
+
     k = 0
     while k < 600:
         p = init_puzzle()
         print(p.reshape(9), ':', puzzle_solvable(p))
         k += 1
-    """
-
