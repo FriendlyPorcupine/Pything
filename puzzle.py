@@ -8,8 +8,7 @@ def init_puzzle():
     np.random.shuffle(puzzle)  # Shuffle the puzzle to create a random starting configuration
 
     # Shape the array into a 2D array AFTER it was shuffled to assure rows and cols get mixed
-    shuffledPuzzle = puzzle.reshape((3, 3))
-    return shuffledPuzzle
+    return puzzle.reshape((3, 3))
 
 
 # Define a function to print the puzzle to the console
@@ -27,24 +26,21 @@ def print_puzzle(puzzleToPrint):
 
 # Define a function to find the position of the empty tile
 def find_empty(puzzle):
-    empty_row, empty_col = 0, 0
-
     for i in range(3):  # iterate ofer the rows of the puzzle
         for j in range(3):  # iterate ofer the cols of the puzzle
             if puzzle[i][j] == 0:  # find tile with value zero (0) & remember position in the 2D array
-                empty_row, empty_col = i, j
-    return empty_row, empty_col
+                return i, j
 
 
 # Define a function to check if the puzzle is solved
-def puzzle_inorder(puzzle):
+def puzzle_unordered(puzzle):
     puzzleInOrder = np.arange(9)  # Make an array with values in the correct order to compare to
     puzzle = puzzle.reshape(9)  # Reshape 2D array puzzle to simple array
 
     for i in puzzleInOrder:  # iterate ofer the hole array
         if puzzle[i] != puzzleInOrder[i]:  # check the values of puzzle match the array with correct order, if not ...
-            return False
-    return True
+            return True
+    return False
 
 
 # Define a function to move a tile in the puzzle
@@ -74,6 +70,7 @@ def move_tile(puzzle, direction):
 
 # maybe add function to count how many tiles are already at a correct position?
 # To test the functions
+
 """
 if __name__ == '__main__':
     p = init_puzzle()
@@ -82,5 +79,8 @@ if __name__ == '__main__':
     print(find_empty(p))
     move_tile(p, "right")
 """
+
+
+
 
 

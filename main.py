@@ -19,7 +19,7 @@ def average(arrayToCalculate):
     allMovesTogether = 0
     for i in arrayToCalculate:
         allMovesTogether += i  # add the moves needed to solve the puzzle
-    averageMovesNeeded = allMovesTogether / 100
+    averageMovesNeeded = allMovesTogether / arrayToCalculate + 1
     return averageMovesNeeded
 
 
@@ -27,7 +27,7 @@ def play_puzzle_game():
     puzzle = p.init_puzzle()  # Create puzzle to play & print it to console
     p.print_puzzle(puzzle)
 
-    while p.puzzle_inorder(puzzle) != 1:  # Loop until the puzzle is solved
+    while p.puzzle_unordered(puzzle):  # Loop until the puzzle is solved
         direction = input('Make a move (up, down, left, right): ')  # Scan the move of the player
         p.move_tile(puzzle, direction)
         p.print_puzzle(puzzle)
@@ -37,5 +37,5 @@ def play_puzzle_game():
 
 
 if __name__ == '__main__':
-    # print(average(one_hundred(oneHundredTries)))
+    # print(one_hundred(oneHundredTries))
     play_puzzle_game()

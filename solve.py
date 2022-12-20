@@ -8,7 +8,7 @@ directions = ['up', 'down', 'left', 'right']  # array with the four possible dir
 def random_solve(unsolvedPuzzle):
     countMoves = 0  # variable to count how many moves where necessary to solve the puzzle
 
-    while p.puzzle_inorder(unsolvedPuzzle) != 1:  # Loop until the puzzle is solved
+    while p.puzzle_unordered(unsolvedPuzzle):  # Loop until the puzzle is solved
         direction = np.random.choice(directions)  # Choose random direction to move the empty tile
         if p.move_tile(unsolvedPuzzle, direction):  # if move is True count, increment countMoves
             countMoves += 1
