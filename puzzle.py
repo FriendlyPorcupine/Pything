@@ -86,9 +86,9 @@ def puzzle_solvable(puzzle):
     :return: boolean """
     inverseCount = 0
     puzzle = puzzle.reshape(9)  # reshape the 2D Array into a 1D Array
-    for i in range(9):  # Go through the Array to find the 1st number
-        for j in range(i + 1, 9):  # Go through the Array to find the 2nd number
-            if puzzle[i] > puzzle[j] and (puzzle[j] != 0 and puzzle[i] != 0):  # Compare the 1st and the 2nd number
+    for i in range(9):
+        for j in range(i + 1, 9):  # compare i with number to the right of i
+            if puzzle[i] > puzzle[j] and (puzzle[j] != 0 and puzzle[i] != 0):
                 inverseCount += 1  # if the 1st number is bigger than the 2nd number, increase counter
     return bool((inverseCount % 2) == 0)  # if the counter is a even the puzzle is solvable
 
