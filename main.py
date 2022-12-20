@@ -19,11 +19,14 @@ def average(arrayToCalculate):
     allMovesTogether = 0
     for i in arrayToCalculate:
         allMovesTogether += i  # add the moves needed to solve the puzzle
-    averageMovesNeeded = allMovesTogether / arrayToCalculate + 1
+    averageMovesNeeded = allMovesTogether / len(arrayToCalculate)
     return averageMovesNeeded
 
 
 def play_puzzle_game():
+    """
+    To play the 8-Puzzle as a User on the Console
+    """
     puzzle = p.init_puzzle()  # Create puzzle to play & print it to console
     p.print_puzzle(puzzle)
 
