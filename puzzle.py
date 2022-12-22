@@ -99,15 +99,13 @@ def puzzle_solvable(puzzle):
 def manhattan_heuristic(puzzle):
     goalPuzzle = np.arange(9).reshape((3, 3))
     heuristic = 0
-
-    print_puzzle(puzzle)
-
+    # print_puzzle(puzzle)
     for i in range(1, 9):
         indexPuzzle, indexGoal = tuple(np.argwhere(puzzle == i)[0]), tuple(np.argwhere(goalPuzzle == i)[0])
 
         steps = abs(indexGoal[0] - indexPuzzle[0]) + abs(indexGoal[1] - indexPuzzle[1])
         heuristic += steps
-        print(i, ':', indexPuzzle, '->', indexGoal, '=', steps, '|', heuristic)
+        # print(i, ':', indexPuzzle, '->', indexGoal, '=', steps, '|', heuristic)
     return heuristic
 
 
