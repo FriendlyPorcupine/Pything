@@ -27,14 +27,12 @@ def play_game():
     """ To play the 8-Puzzle as a User on the Console """
     puzzle = p.init_puzzle()  # Create puzzle to play & print it to console
     p.print_puzzle(puzzle)
-    lastMove = ''
 
     while p.puzzle_unordered(puzzle):  # Loop until the puzzle is solved
         print('Possible Moves are: ', p.moves_possible(puzzle))
         direction = input('Make a move :')  # Scan the move of the player
         p.move_tile(puzzle, direction)
         p.print_puzzle(puzzle)
-        lastMove = direction
 
     print('The puzzle is solved')
     p.print_puzzle(puzzle)
