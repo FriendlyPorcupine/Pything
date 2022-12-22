@@ -96,6 +96,13 @@ def puzzle_solvable(puzzle):
     return bool((inverseCount % 2) == 0)  # if the counter is a even the puzzle is solvable
 
 
+def manhattan_heuristic(puzzle):
+    return 0
+
+
+def hamming_heuristic(puzzle):
+    return 0
+
 # maybe add function to count how many tiles are already at a correct position?
 # To test the functions
 
