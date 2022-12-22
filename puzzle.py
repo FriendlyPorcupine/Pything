@@ -94,19 +94,19 @@ def move_tile(puzzle, direction):
     :param direction: up, down, left, right
     :return: Boolean """
     empty_row, empty_col = find_empty(puzzle)  # Get the position of the empty tile
-    directions = moves_possible(puzzle)  # Get possible directions to move the tile
+    possible = moves_possible(puzzle)  # Get possible directions to move the tile
 
     # Move the empty tile in the specified direction up & down change the row, left & right change the col
-    if direction == "up" and direction in directions:
+    if direction == "up" and direction in possible:
         puzzle[empty_row][empty_col] = puzzle[empty_row - 1][empty_col]
         puzzle[empty_row - 1][empty_col] = 0
-    elif direction == "down" and direction in directions:
+    elif direction == "down" and direction in possible:
         puzzle[empty_row][empty_col] = puzzle[empty_row + 1][empty_col]
         puzzle[empty_row + 1][empty_col] = 0
-    elif direction == "left" and direction in directions:
+    elif direction == "left" and direction in possible:
         puzzle[empty_row][empty_col] = puzzle[empty_row][empty_col - 1]
         puzzle[empty_row][empty_col - 1] = 0
-    elif direction == "right" and direction in directions:
+    elif direction == "right" and direction in possible:
         puzzle[empty_row][empty_col] = puzzle[empty_row][empty_col + 1]
         puzzle[empty_row][empty_col + 1] = 0
     else:
@@ -134,13 +134,4 @@ def hamming_heuristic(puzzle):
 
 
 # To test the functions
-
-
-if __name__ == '__main__':
-    p = init_puzzle()
-    x = manhattan_heuristic(p)
-    print_puzzle(p)
-    print(moves_possible(p, ' '))
-
-
-
+# if __name__ == '__main__':
