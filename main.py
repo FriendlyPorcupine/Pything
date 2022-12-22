@@ -23,15 +23,18 @@ def average(arrayToCalculate):
     return averageMovesNeeded
 
 
-def play_puzzle_game():
+def play_game():
     """ To play the 8-Puzzle as a User on the Console """
     puzzle = p.init_puzzle()  # Create puzzle to play & print it to console
     p.print_puzzle(puzzle)
+    lastMove = ''
 
     while p.puzzle_unordered(puzzle):  # Loop until the puzzle is solved
-        direction = input('Make a move (up, down, left, right): ')  # Scan the move of the player
+        print('Possible Moves are: ', p.moves_possible(puzzle))
+        direction = input('Make a move :')  # Scan the move of the player
         p.move_tile(puzzle, direction)
         p.print_puzzle(puzzle)
+        lastMove = direction
 
     print('The puzzle is solved')
     p.print_puzzle(puzzle)
@@ -39,4 +42,4 @@ def play_puzzle_game():
 
 if __name__ == '__main__':
     # print(one_hundred(oneHundredTries))
-    play_puzzle_game()
+    play_game()

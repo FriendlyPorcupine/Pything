@@ -16,6 +16,20 @@ def init_puzzle():
     return puzzle.reshape((3, 3))
 
 
+def puzzle_solvable(puzzle):
+    """ Define a function to find out if the puzzle is solvable
+
+    :param puzzle: 2D Array
+    :return: boolean """
+    inverseCount = 0
+    puzzle = puzzle.reshape(9)  # reshape the 2D Array into a 1D Array
+    for i in range(9):
+        for j in range(i + 1, 9):  # compare i with number to the right of i
+            if puzzle[i] > puzzle[j] and (puzzle[j] != 0 and puzzle[i] != 0):
+                inverseCount += 1  # if the 1st number is bigger than the 2nd number, increase counter
+    return bool((inverseCount % 2) == 0)  # if the counter is a even the puzzle is solvable
+
+
 def print_puzzle(puzzleToPrint):
     """ Define a function to print the puzzle to the console
 
@@ -56,6 +70,23 @@ def puzzle_unordered(puzzle):
     return False
 
 
+def moves_possible(puzzle):
+    directions = ['up', 'down', 'left', 'right']  # array with the four possible directions
+    empty_row, empty_col = find_empty(puzzle)  # get the position of the empty tile
+
+    if empty_row == 0:
+        directions.remove('up')  # if the empty tile is in row 0, it cannot move up
+    elif empty_row == 2:
+        directions.remove('down')  # if the empty tile is in row 2, it cannot move down
+
+    if empty_col == 0:
+        directions.remove('left')  # if the empty tile is in col 0, it cannot move left
+    elif empty_col == 2:
+        directions.remove('right')  # if the empty tile is in col 0, it cannot move right
+
+    return directions
+
+
 def move_tile(puzzle, direction):
     """ Define a function to move a tile in the puzzle
 
@@ -63,49 +94,37 @@ def move_tile(puzzle, direction):
     :param direction: up, down, left, right
     :return: Boolean """
     empty_row, empty_col = find_empty(puzzle)  # Get the position of the empty tile
+    directions = moves_possible(puzzle)  # Get possible directions to move the tile
 
     # Move the empty tile in the specified direction up & down change the row, left & right change the col
-    if direction == "up" and empty_row > 0:
+    if direction == "up" and direction in directions:
         puzzle[empty_row][empty_col] = puzzle[empty_row - 1][empty_col]
         puzzle[empty_row - 1][empty_col] = 0
-    elif direction == "down" and empty_row < 2:
+    elif direction == "down" and direction in directions:
         puzzle[empty_row][empty_col] = puzzle[empty_row + 1][empty_col]
         puzzle[empty_row + 1][empty_col] = 0
-    elif direction == "left" and empty_col > 0:
+    elif direction == "left" and direction in directions:
         puzzle[empty_row][empty_col] = puzzle[empty_row][empty_col - 1]
         puzzle[empty_row][empty_col - 1] = 0
-    elif direction == "right" and empty_col < 2:
+    elif direction == "right" and direction in directions:
         puzzle[empty_row][empty_col] = puzzle[empty_row][empty_col + 1]
         puzzle[empty_row][empty_col + 1] = 0
     else:
+        print('Move not possible')
         return False
     return True
 
 
-def puzzle_solvable(puzzle):
-    """ Define a function to find out if the puzzle is solvable
-
-    :param puzzle: 2D Array
-    :return: boolean """
-    inverseCount = 0
-    puzzle = puzzle.reshape(9)  # reshape the 2D Array into a 1D Array
-    for i in range(9):
-        for j in range(i + 1, 9):  # compare i with number to the right of i
-            if puzzle[i] > puzzle[j] and (puzzle[j] != 0 and puzzle[i] != 0):
-                inverseCount += 1  # if the 1st number is bigger than the 2nd number, increase counter
-    return bool((inverseCount % 2) == 0)  # if the counter is a even the puzzle is solvable
-
-
 def manhattan_heuristic(puzzle):
-    goalPuzzle = np.arange(9).reshape((3, 3))
+    goalPuzzle = np.arange(9).reshape((3, 3))  # make correct puzzle to compare to
     heuristic = 0
-    # print_puzzle(puzzle)
     for i in range(9):
+        # Get index of tile with number i for both puzzles
         indexPuzzle, indexGoal = tuple(np.argwhere(puzzle == i)[0]), tuple(np.argwhere(goalPuzzle == i)[0])
 
-        steps = abs(indexGoal[0] - indexPuzzle[0]) + abs(indexGoal[1] - indexPuzzle[1])
-        heuristic += steps
-        # print(i, ':', indexPuzzle, '->', indexGoal, '=', steps, '|', heuristic)
+        steps = abs(indexGoal[0] - indexPuzzle[0]) + abs(indexGoal[1] - indexPuzzle[1])  # calculate needed steps
+        heuristic += steps  # add all steps together
+        # print(i, ':', indexPuzzle, '->', indexGoal, '=', steps, '|', heuristic)  # just for now
     return heuristic
 
 
@@ -120,7 +139,8 @@ def hamming_heuristic(puzzle):
 if __name__ == '__main__':
     p = init_puzzle()
     x = manhattan_heuristic(p)
-    print(x)
+    print_puzzle(p)
+    print(moves_possible(p, ' '))
 
 
 
