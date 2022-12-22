@@ -97,20 +97,27 @@ def puzzle_solvable(puzzle):
 
 
 def manhattan_heuristic(puzzle):
-    return 0
+    goalPuzzle = np.arange(9).reshape((3, 3))
+    heuristic = 0
+
+    for i in range(9):
+        indexPuzzle, indexGoal = tuple(np.argwhere(puzzle == i)[0]), tuple(np.argwhere(goalPuzzle == i)[0])
+
+        steps = abs(indexGoal[0] - indexPuzzle[0]) + abs(indexGoal[1] - indexPuzzle[1])
+        heuristic += steps
+        # print(i, ':', indexPuzzle, '->', indexGoal, '=', steps, '|', heuristic)
+    return heuristic
 
 
 def hamming_heuristic(puzzle):
+    # already done by Raffael -> problems with git
     return 0
 
-# maybe add function to count how many tiles are already at a correct position?
+
 # To test the functions
 
-
+"""
 if __name__ == '__main__':
+"""
 
-    k = 0
-    while k < 600:
-        p = init_puzzle()
-        print(p.reshape(9), ':', puzzle_solvable(p))
-        k += 1
+
