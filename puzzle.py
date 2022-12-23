@@ -150,5 +150,6 @@ def hamming_heuristic(puzzle):
 
 
 
+
 # To test the functions
 # if __name__ == '__main__':
