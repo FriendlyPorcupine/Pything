@@ -129,8 +129,16 @@ def manhattan_heuristic(puzzle):
 
 
 def hamming_heuristic(puzzle):
-    # already done by Raffael -> problems with git
-    return 0
+    goal_puzzle = np.arange(9).reshape((3, 3))  # Create the ideally ordered puzzle
+    heuristic = 0  # Heuristic-Counter
+
+    # Here the goal_puzzle is compared to the passed puzzle and whenever there is a different number
+    # in the compared cells, the heuristic is increased by 1
+    for row in range(3):
+        for col in range(3):
+            if goal_puzzle[row, col] != puzzle[row, col]:
+                heuristic += 1
+    return heuristic
 
 
 # To test the functions
