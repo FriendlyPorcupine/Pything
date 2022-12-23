@@ -71,6 +71,10 @@ def puzzle_unordered(puzzle):
 
 
 def moves_possible(puzzle):
+    """ Define a function to find all possible directions to move the empty tile
+
+    :param puzzle: 2D Array
+    :return: an array of strings with the directions """
     directions = ['up', 'down', 'left', 'right']  # array with the four possible directions
     empty_row, empty_col = find_empty(puzzle)  # get the position of the empty tile
 
@@ -116,6 +120,10 @@ def move_tile(puzzle, direction):
 
 
 def manhattan_heuristic(puzzle):
+    """ Define a function to calculate the heuristic with "Manhattan"
+
+    :param puzzle: 2D Array
+    :return: integer -> heuristic """
     goalPuzzle = np.arange(9).reshape((3, 3))  # make correct puzzle to compare to
     heuristic = 0
     for i in range(9):
