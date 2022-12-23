@@ -146,9 +146,7 @@ def hamming_heuristic(puzzle):
         for col in range(3):
             if goal_puzzle[row, col] != puzzle[row, col]:
                 heuristic += 1
-    return heuristic  # returns the heuristic
-
-
+    return heuristic
 
 
 # To test the functions
