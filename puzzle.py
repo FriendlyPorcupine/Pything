@@ -137,6 +137,13 @@ def manhattan_heuristic(puzzle):
 
 
 def hamming_heuristic(puzzle):
+    # Function of the submodule:
+    # hamming_heuristic function returns the number of incorrect placed digits within the delivered
+    # array - puzzle - compared to the ideal array - goal_puzzle -
+
+    # Input: delivered array - puzzle -
+    # Output: number of wrongly placed digits - heuristic -
+
     goal_puzzle = np.arange(9).reshape((3, 3))  # Create the ideally ordered puzzle
     heuristic = 0  # Heuristic-Counter
 
@@ -147,8 +154,6 @@ def hamming_heuristic(puzzle):
             if goal_puzzle[row, col] != puzzle[row, col]:
                 heuristic += 1
     return heuristic
-
-
 
 # To test the functions
 # if __name__ == '__main__':
