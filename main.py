@@ -2,6 +2,7 @@
 import numpy as np
 import puzzle
 import solve
+import a_star
 
 oneHundredTries = np.arange(100)
 
@@ -39,4 +40,5 @@ def play_game():
 
 
 if __name__ == '__main__':
-    play_game()
+    # play_game()
+    a_star.average_expanded_nodes()
