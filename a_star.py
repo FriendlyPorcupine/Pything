@@ -1,5 +1,4 @@
 import puzzle_class
-import copy
 
 
 # node class for all the different states of the 8-Puzzle
@@ -11,12 +10,13 @@ class Node:
         self.action = action
 
         self.h = 0  # Heuristic
-        self.f = 0  # Heuristic + Gewichtung
         self.g = 0  # Gewichtung
+        self.f = 0  # Heuristic + Gewichtung
 
-# m = Manhatten
+
+# m = Manhattan
 # h = Hamming
-def astar_alg(heuristic):
+def a_star_alg(heuristic):
     puzzle = puzzle_class.Puzzle(puzzle_class.init_puzzle())
     start_node = Node(puzzle)
     # start_node.puzzle.print_puzzle()
@@ -33,8 +33,8 @@ def astar_alg(heuristic):
             if node.f < current_node.f:
                 current_node = node
                 current_index = count
-        #current_node.puzzle.print_puzzle()
-        #print(current_node.h)
+        # current_node.puzzle.print_puzzle()
+        # print(current_node.h)
         closed_list.append(open_list.pop(current_index))
 
         if not current_node.puzzle.puzzle_unordered():
@@ -80,10 +80,11 @@ def astar_alg(heuristic):
 
             open_list.append(child)
 
+
 def average_expanded_nodes(heuristic):
     nodes_expanded = []
     for count in range(10):
-        steps = astar_alg(heuristic)
+        steps = a_star_alg(heuristic)
         nodes_expanded.append(steps)
 
         print(steps)

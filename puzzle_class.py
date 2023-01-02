@@ -2,15 +2,14 @@
 import numpy as np
 import copy
 
+
 class Puzzle:
     # constructor
     def __init__(self, puzzle_array):
         self.puzzle_array = puzzle_array
 
     def print_puzzle(self):
-        """ Define a function to print the puzzle to the console
-
-        :param puzzleToPrint: 2D Array """
+        """ Define a function to print the puzzle to the console """
 
         puzzleToPrint = self.puzzle_array
         for i in range(3):  # iterate ofer the rows of the puzzle
@@ -38,7 +37,6 @@ class Puzzle:
     def puzzle_unordered(self):
         """ Define a function to check if the puzzle is solved
 
-        :param puzzle: 2D Array
         :return: Boolean """
         puzzleInOrder = np.arange(9)  # Make an array with values in the correct order to compare to
         puzzle = self.puzzle_array.reshape(9)  # Reshape 2D array puzzle to simple array
@@ -51,7 +49,6 @@ class Puzzle:
     def moves_possible(self):
         """ Define a function to find all possible directions to move the empty tile
 
-        :param puzzle: 2D Array
         :return: an array of strings with the directions """
         directions = ['up', 'down', 'left', 'right']  # array with the four possible directions
         empty_row, empty_col = self.find_empty()  # get the position of the empty tile
@@ -71,7 +68,6 @@ class Puzzle:
     def move_tile(self, direction):
         """ Define a function to move a tile in the puzzle
 
-        :param puzzle: 2D Array
         :param direction: up, down, left, right
         :return: Boolean """
         puzzle = copy.deepcopy(self.puzzle_array)
@@ -101,7 +97,6 @@ class Puzzle:
     def manhattan_heuristic(self):
         """ Define a function to calculate the heuristic with "Manhattan"
 
-        :param puzzle: 2D Array
         :return: integer -> heuristic """
         puzzle = copy.deepcopy(self.puzzle_array)
         goalPuzzle = np.arange(9).reshape((3, 3))  # make correct puzzle to compare to
@@ -119,7 +114,6 @@ class Puzzle:
         """ Define a function that returns the number of incorrect placed digits within the delivered
         array - puzzle - compared to the ideal array - goal_puzzle -
 
-        :param  puzzle: 2D Array
         :return: heuristic """
         puzzle = copy.deepcopy(self.puzzle_array).reshape(9)
         goal_puzzle = np.arange(9)  # Create the ideally ordered puzzle
@@ -132,6 +126,7 @@ class Puzzle:
                 heuristic += 1
 
         return heuristic
+
 
 def init_puzzle():
     """ Define a function to initialize the puzzle
