@@ -30,6 +30,7 @@ def a_star_alg(heuristic):
         current_node = open_list[0]
         current_index = 0
         for count, node in enumerate(open_list):
+            print(count, ':', 'node:', node.f, 'current_node:', current_node.f)
             if node.f < current_node.f:
                 current_node = node
                 current_index = count
@@ -42,9 +43,8 @@ def a_star_alg(heuristic):
             while current_node is not None:
                 path.append(current_node)
                 current_node = current_node.parent
-
-            for move in path[::-1]:
-                print(move.puzzle.print_puzzle())
+                #for move in path[::-1]:
+                #print(move.puzzle.print_puzzle())
             return len(closed_list)
 
         children = []
@@ -81,13 +81,15 @@ def a_star_alg(heuristic):
             open_list.append(child)
 
 
+# ??? werden die children verglichen untereinander und bei dem child mit dem kleinsten f weitergemacht???
+
+
 def average_expanded_nodes(heuristic):
     nodes_expanded = []
-    for count in range(10):
+
+    for i in range(1):
         steps = a_star_alg(heuristic)
         nodes_expanded.append(steps)
 
-        print(steps)
-
     average = sum(nodes_expanded) / len(nodes_expanded)
-    print(round(average, 2))
+    return round(average, 2)
