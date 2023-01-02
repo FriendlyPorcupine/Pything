@@ -1,3 +1,5 @@
+import numpy as np
+
 import puzzle_class
 
 
@@ -43,8 +45,8 @@ def a_star_alg(heuristic):
                 path.append(current_node)
                 current_node = current_node.parent
 
-            for move in path[::-1]:
-                print(move.puzzle.print_puzzle())
+            #for move in path[::-1]:
+                #print(move.puzzle.print_puzzle())
             return len(closed_list)
 
         children = []
@@ -62,6 +64,7 @@ def a_star_alg(heuristic):
                 new_node = Node(current_node.puzzle.move_tile(direction), current_node, direction)
                 children.append(new_node)
 
+        """
         for child in children:
             for child_in_closed_list in closed_list:
                 if child.puzzle == child_in_closed_list.puzzle:
@@ -77,8 +80,34 @@ def a_star_alg(heuristic):
             for node in open_list:
                 if child.puzzle == node.puzzle and child.g > node.g:
                     continue
-
+                    
             open_list.append(child)
+        """
+
+        for child in children:
+            flag = True
+
+            child.g = current_node.g + 1
+            if heuristic == "m":
+                child.h = child.puzzle.manhattan_heuristic()
+            elif heuristic == "h":
+                child.h = child.puzzle.hamming_heuristic()
+            child.f = child.g + child.h
+
+            for child_in_closed_list in closed_list:
+                if np.array_equal(child.puzzle.puzzle_array,
+                                  child_in_closed_list.puzzle.puzzle_array) and child.g == child_in_closed_list.g:
+                    flag = False
+                    # print("copy")
+
+            for node in open_list:
+                if np.array_equal(child.puzzle.puzzle_array,
+                                  node.puzzle.puzzle_array) and child.g > node.g:  # child.puzzle == node.puzzle and child.g > node.g
+                    flag = False
+                    # print("duplicate in open list but long")
+
+            if flag:
+                open_list.append(child)
 
 
 def average_expanded_nodes(heuristic):
@@ -87,7 +116,7 @@ def average_expanded_nodes(heuristic):
         steps = a_star_alg(heuristic)
         nodes_expanded.append(steps)
 
-        print(steps)
+        print(steps, count)
 
     average = sum(nodes_expanded) / len(nodes_expanded)
     print(round(average, 2))

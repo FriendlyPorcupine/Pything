@@ -11,7 +11,7 @@ def play_game():
     while game.puzzle_unordered():  # Loop until the puzzle is solved
         print('Possible Moves are: ', game.moves_possible())
         direction = input('Make a move :')  # Scan the move of the player
-        game.move_tile( direction)
+        game.move_tile(direction)
         game.print_puzzle()
 
     print('The puzzle is solved')
@@ -20,7 +20,7 @@ def play_game():
 
 if __name__ == '__main__':
     #  play_game()
-    print(a_star.a_star_alg("m"))
+    print(a_star.average_expanded_nodes("h"))
 
     # for i in range(5):
     #   p = puzzle.Puzzle(puzzle.init_puzzle())
