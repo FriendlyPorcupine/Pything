@@ -1,27 +1,7 @@
 # import the puzzle class
 import numpy as np
-import solve
 import a_star
 import puzzle_class as puzzle
-
-oneHundredTries = np.arange(100)
-
-
-def one_hundred(arrayWithMoves):
-    for i in arrayWithMoves:
-        game = puzzle.init_puzzle()  # Create puzzle to play & print it to console
-        puzzle.move_tile(game, 'down')  # Make puzzle with just one wrong tile
-        moves = solve.random_solve(game)  # use the random solve method with simple puzzle
-        arrayWithMoves[i] = moves  # save the number of moves necessary to solve the puzzle
-    return arrayWithMoves
-
-
-def average(arrayToCalculate):
-    allMovesTogether = 0
-    for i in arrayToCalculate:
-        allMovesTogether += i  # add the moves needed to solve the puzzle
-    averageMovesNeeded = allMovesTogether / len(arrayToCalculate)
-    return averageMovesNeeded
 
 
 def play_game():
@@ -40,5 +20,9 @@ def play_game():
 
 
 if __name__ == '__main__':
-    # play_game()
-    a_star.astar_alg(1)
+    #  play_game()
+    print(a_star.astar_alg("m"))
+
+    # for i in range(5):
+    #   p = puzzle.Puzzle(puzzle.init_puzzle())
+    #  print(p.manhattan_heuristic())

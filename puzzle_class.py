@@ -121,16 +121,16 @@ class Puzzle:
 
         :param  puzzle: 2D Array
         :return: heuristic """
-        puzzle = copy.deepcopy(self.puzzle_array)
-        goal_puzzle = np.arange(9).reshape((3, 3))  # Create the ideally ordered puzzle
+        puzzle = copy.deepcopy(self.puzzle_array).reshape(9)
+        goal_puzzle = np.arange(9)  # Create the ideally ordered puzzle
         heuristic = 0  # Heuristic-Counter
 
         # Here the goal_puzzle is compared to the passed puzzle and whenever there is a different number
         # in the compared cells, the heuristic is increased by 1
-        for row in range(3):
-            for col in range(3):
-                if goal_puzzle[row, col] != puzzle[row, col] and goal_puzzle[row, col] != 0:
-                    heuristic += 1
+        for i in range(1, 9):
+            if goal_puzzle[i] != puzzle[i]:
+                heuristic += 1
+
         return heuristic
 
 def init_puzzle():

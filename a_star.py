@@ -14,8 +14,8 @@ class Node:
         self.f = 0  # Heuristic + Gewichtung
         self.g = 0  # Gewichtung
 
-# 0 = Manhatten
-# 1 = Hamming
+# m = Manhatten
+# h = Hamming
 def astar_alg(heuristic):
     puzzle = puzzle_class.Puzzle(puzzle_class.init_puzzle())
     start_node = Node(puzzle)
@@ -33,7 +33,7 @@ def astar_alg(heuristic):
             if node.f < current_node.f:
                 current_node = node
                 current_index = count
-        # current_node.puzzle.print_puzzle()
+        #current_node.puzzle.print_puzzle()
         #print(current_node.h)
         closed_list.append(open_list.pop(current_index))
 
@@ -68,9 +68,9 @@ def astar_alg(heuristic):
                     continue
 
             child.g = current_node.g + 1
-            if heuristic == 0:
+            if heuristic == "m":
                 child.h = child.puzzle.manhattan_heuristic()
-            elif heuristic == 1:
+            elif heuristic == "h":
                 child.h = child.puzzle.hamming_heuristic()
             child.f = child.g + child.h
 
@@ -80,12 +80,13 @@ def astar_alg(heuristic):
 
             open_list.append(child)
 
-def average_expanded_nodes():
+def average_expanded_nodes(heuristic):
     nodes_expanded = []
-    for count in range(20):
-        nodes_expanded.append(astar_alg(0))
-        print("done")
-        print(count)
+    for count in range(10):
+        steps = astar_alg(heuristic)
+        nodes_expanded.append(steps)
+
+        print(steps)
 
     average = sum(nodes_expanded) / len(nodes_expanded)
     print(round(average, 2))
