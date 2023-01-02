@@ -106,7 +106,7 @@ class Puzzle:
         puzzle = copy.deepcopy(self.puzzle_array)
         goalPuzzle = np.arange(9).reshape((3, 3))  # make correct puzzle to compare to
         heuristic = 0
-        for i in range(9):
+        for i in range(1, 9):
             # Get index of tile with number i for both puzzles
             indexPuzzle, indexGoal = tuple(np.argwhere(puzzle == i)[0]), tuple(np.argwhere(goalPuzzle == i)[0])
 

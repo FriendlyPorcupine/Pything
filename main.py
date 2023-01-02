@@ -1,8 +1,8 @@
 # import the puzzle class
 import numpy as np
-import puzzle
 import solve
 import a_star
+import puzzle_class as puzzle
 
 oneHundredTries = np.arange(100)
 
@@ -41,4 +41,4 @@ def play_game():
 
 if __name__ == '__main__':
     # play_game()
-    a_star.average_expanded_nodes()
+    a_star.astar_alg(1)

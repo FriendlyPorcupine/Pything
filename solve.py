@@ -4,7 +4,6 @@ from typing import Any
 import numpy as np
 from queue import PriorityQueue
 from dataclasses import dataclass
-import puzzle as p
 
 directions = ['up', 'down', 'left', 'right']  # array with the four possible directions
 
