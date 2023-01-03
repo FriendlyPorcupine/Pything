@@ -60,6 +60,9 @@ if __name__ == '__main__':
           '\n mean Nodes expanded:', mean_nodes_hamming, 'with standard deviation', deviation_nodes_hamming,
           '\n mean Time needed:', mean_time_hamming, 'with standard deviation', deviation_time_hamming)
 
+    print(one_hundred_tries_manhattan)
+    print(one_hundred_tries_hamming)
+
 
 
 

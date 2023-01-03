@@ -61,7 +61,6 @@ def a_star_alg(heuristic):
             return len(closed_list)
 
         # in this part the children nodes of the current_node are created
-        children = []
         # makes sure that the move that led to the current node is not reversed
         for direction in directions:
             if direction == "up" and current_node.action == "down":
@@ -72,23 +71,19 @@ def a_star_alg(heuristic):
                 continue
             elif direction == "left" and current_node.action == "right":
                 continue
-            # if the move is possible, a new child node is created and added to the children list
+            # if the move is possible, a new child node is created and added to the open list
             if direction in current_node.puzzle.moves_possible():
                 new_node = Node(current_node.puzzle.move_tile(direction), current_node, direction)
-                children.append(new_node)
 
-        for child in children:
-            # g, h and f values for the created node values are set
-            # depending on what parameter was used, either Manhattan or Hamming was used as the heuristic
-            child.g = current_node.g + 1
-            if heuristic == "m":
-                child.h = child.puzzle.manhattan_heuristic()
-            elif heuristic == "h":
-                child.h = child.puzzle.hamming_heuristic()
-            child.f = child.g + child.h
+                new_node.g = current_node.g + 1
+                if heuristic == "m":
+                    new_node.h = new_node.puzzle.manhattan_heuristic()
+                elif heuristic == "h":
+                    new_node.h = new_node.puzzle.hamming_heuristic()
+                new_node.f = new_node.g + new_node.h
 
-            # the children nodes that were created are added into the priority queue with the f value as their priority
-            open_list.put((child.f, child))
+                # the new nodes that were created are added into the priority queue with the f value as their priority
+                open_list.put((new_node.f, new_node))
 
 
 def expanded_nodes_time(heuristic):
