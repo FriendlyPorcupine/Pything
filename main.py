@@ -50,11 +50,15 @@ if __name__ == '__main__':
     mean_time_hamming = round(statistics.mean(time_list_hamming), 2)
     deviation_time_hamming = round(statistics.stdev(time_list_hamming), 2)
 
-    print('Manhattan:\nNodes:', mean_nodes_manhattan, 'with standard deviation', deviation_nodes_manhattan)
-    print('Time:', mean_time_manhattan, 'with standard deviation', deviation_time_manhattan, end='\n')
+    print('Manhattan:'
+          '\nThe A*-Algorithm using the Manhattan-Heuristic expanded a total of', sum(node_list_manhattan), 'Nodes',
+          '\n mean Nodes expanded:', mean_nodes_manhattan, 'with standard deviation', deviation_nodes_manhattan,
+          '\n mean Time needed:', mean_time_manhattan, 'with standard deviation', deviation_time_manhattan, end='\n\n')
 
-    print('Hamming:\nNodes:', mean_nodes_hamming, 'with standard deviation', deviation_nodes_hamming)
-    print('Time:', mean_time_hamming, 'with standard deviation', deviation_time_hamming)
+    print('Hamming:'
+          '\nThe A*-Algorithm using the Hamming-Heuristic expanded a total of', sum(node_list_hamming), 'Nodes',
+          '\n mean Nodes expanded:', mean_nodes_hamming, 'with standard deviation', deviation_nodes_hamming,
+          '\n mean Time needed:', mean_time_hamming, 'with standard deviation', deviation_time_hamming)
 
 
 

@@ -125,7 +125,7 @@ def a_star_alg(heuristic):
 def expanded_nodes_time(heuristic):
     nodes_expanded_time = {}
 
-    for count in range(3):
+    for count in range(100):
         start_time = time.time()
         steps = a_star_alg(heuristic)
         end_time = time.time()
