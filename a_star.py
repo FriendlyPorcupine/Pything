@@ -130,4 +130,5 @@ def average_expanded_nodes(heuristic):
         print(steps, count)
 
     average = sum(nodes_expanded) / len(nodes_expanded)
-    return round(average, 2)
+    return nodes_expanded
+    # return round(average, 2)
