@@ -50,20 +50,22 @@ if __name__ == '__main__':
     mean_time_hamming = round(statistics.mean(time_list_hamming), 2)
     deviation_time_hamming = round(statistics.stdev(time_list_hamming), 2)
 
+    max_manhattan = (max(node_list_manhattan), max(time_list_manhattan))
+    max_hamming = (max(node_list_hamming), max(time_list_hamming))
+
+    min_manhattan = (min(node_list_manhattan), min(time_list_manhattan))
+    min_hamming = (min(node_list_hamming), min(time_list_hamming))
+
     print('Manhattan:'
           '\nThe A*-Algorithm using the Manhattan-Heuristic expanded a total of', sum(node_list_manhattan), 'Nodes',
-          '\n mean Nodes expanded:', mean_nodes_manhattan, 'with standard deviation', deviation_nodes_manhattan,
-          '\n mean Time needed:', mean_time_manhattan, 'with standard deviation', deviation_time_manhattan, end='\n\n')
+          '\nThe puzzle with the max time and nodes needed:', max_manhattan[0], 'Nodes', 'and', max_manhattan[1], 'sec',
+          '\nThe puzzle with the min time and nodes needed:', min_manhattan[0], 'Nodes', 'and', min_manhattan[1], 'sec',
+          '\n -> mean Nodes expanded:', mean_nodes_manhattan, 'with standard deviation', deviation_nodes_manhattan,
+          '\n -> mean Time needed:', mean_time_manhattan, 'with standard deviation', deviation_time_manhattan, end='\n\n')
 
     print('Hamming:'
           '\nThe A*-Algorithm using the Hamming-Heuristic expanded a total of', sum(node_list_hamming), 'Nodes',
-          '\n mean Nodes expanded:', mean_nodes_hamming, 'with standard deviation', deviation_nodes_hamming,
-          '\n mean Time needed:', mean_time_hamming, 'with standard deviation', deviation_time_hamming)
-
-    print(one_hundred_tries_manhattan)
-    print(one_hundred_tries_hamming)
-
-
-
-
-
+          '\nThe puzzle with the max time and nodes needed:', max_hamming[0], 'Nodes', 'and', max_hamming[1], 'sec',
+          '\nThe puzzle with the min time and nodes needed:', min_hamming[0], 'Nodes', 'and', min_hamming[1], 'sec',
+          '\n -> mean Nodes expanded:', mean_nodes_hamming, 'with standard deviation', deviation_nodes_hamming,
+          '\n -> mean Time needed:', mean_time_hamming, 'with standard deviation', deviation_time_hamming)

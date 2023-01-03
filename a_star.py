@@ -27,9 +27,9 @@ class Node:
 
 
 # a star algorithm that takes the parameters "m" and "h" for the two different heuristics - m = Manhattan, h = Hamming
-def a_star_alg(heuristic):
+def a_star_alg(heuristic, randomPuzzle):
     # initializing a random puzzle
-    puzzle = puzzle_class.Puzzle(puzzle_class.init_puzzle())
+    puzzle = randomPuzzle
     # creating the first node with the randomly created puzzle
     start_node = Node(puzzle)
     # creating a priority queue where all the children nodes will be added to
@@ -89,14 +89,18 @@ def a_star_alg(heuristic):
 def expanded_nodes_time(heuristic):
     # dictionary is created where expanded nodes and run time is saved
     nodes_expanded_time = {}
+    one_hundred_puzzles = []
     # loop that goes through 100 iterations with different 8-Puzzles that are solved, run time and expanded nodes are
     # saved in nodes_expanded_time dictionary
     for count in range(100):
+        one_hundred_puzzles.append(puzzle_class.Puzzle(puzzle_class.init_puzzle()))
+
+    for count, puzzle in enumerate(one_hundred_puzzles):
         start_time = time.time()
-        steps = a_star_alg(heuristic)
+        steps = a_star_alg(heuristic, puzzle)
         end_time = time.time()
 
         runTime = round(end_time - start_time, 2)
         nodes_expanded_time.update({count: (steps, runTime)})
-        # print(count, ':', steps, runTime)
+
     return nodes_expanded_time
