@@ -43,11 +43,13 @@ def a_star_alg(heuristic):
 
     # while the priority queue is not empty
     while not open_list.empty():
-        # the
+        # the element with the highest priority is saved in current_node
         current_node = open_list.get()[1]
-
+        # since the current not will be expanded, it is added to the closed list
         closed_list.add(current_node)
 
+        # when a node is reached that is in the solved state a new list is created where all the parent nodes of the
+        # node is saved until the start node is reached in reverse order
         if not current_node.puzzle.puzzle_unordered():
             path = []
             while current_node is not None:
@@ -58,7 +60,9 @@ def a_star_alg(heuristic):
             # print(move.puzzle.print_puzzle())
             return len(closed_list)
 
+        # in this part the children nodes of the current_node are created
         children = []
+        # makes sure that the move that led to the current node is not reversed
         for direction in directions:
             if direction == "up" and current_node.action == "down":
                 continue
@@ -68,34 +72,14 @@ def a_star_alg(heuristic):
                 continue
             elif direction == "left" and current_node.action == "right":
                 continue
-
+            # if the move is possible, a new child node is created and added to the children list
             if direction in current_node.puzzle.moves_possible():
                 new_node = Node(current_node.puzzle.move_tile(direction), current_node, direction)
                 children.append(new_node)
 
-        """
-        :for child in children:
-            for child_in_closed_list in closed_list
-                if child.puzzle == child_in_closed_list.puzzle:
-                    continue
-
-            child.g = current_node.g + 1
-            if heuristic == "m":
-                child.h = child.puzzle.manhattan_heuristic()
-            elif heuristic == "h":
-                child.h = child.puzzle.hamming_heuristic()
-            child.f = child.g + child.h
-
-            for node in open_list:
-                if child.puzzle == node.puzzle and child.g > node.g:
-                    continue
-                    
-            open_list.append(child)
-        """
-
         for child in children:
-            flag = True
-
+            # g, h and f values for the created node values are set
+            # depending on what parameter was used, either Manhattan or Hamming was used as the heuristic
             child.g = current_node.g + 1
             if heuristic == "m":
                 child.h = child.puzzle.manhattan_heuristic()
@@ -103,28 +87,15 @@ def a_star_alg(heuristic):
                 child.h = child.puzzle.hamming_heuristic()
             child.f = child.g + child.h
 
-            """""
-            for child_in_closed_list in closed_list:
-                if np.array_equal(child.puzzle.puzzle_array,
-                                  child_in_closed_list.puzzle.puzzle_array) and child.g == child_in_closed_list.g:
-                    flag = False
-                    print("copy")
-
-
-            for node in open_list.queue:
-                if np.array_equal(child.puzzle.puzzle_array,
-                                  node[1].puzzle.puzzle_array) and child.g > node[1].g:  # child.puzzle == node.puzzle and child.g > node.g
-                    flag = False
-                    print("duplicate in open list but long")
-            """
-
-            if flag:
-                open_list.put((child.f, child))
+            # the children nodes that were created are added into the priority queue with the f value as their priority
+            open_list.put((child.f, child))
 
 
 def expanded_nodes_time(heuristic):
+    # dictionary is created where expanded nodes and run time is saved
     nodes_expanded_time = {}
-
+    # loop that goes through 100 iterations with different 8-Puzzles that are solved, run time and expanded nodes are
+    # saved in nodes_expanded_time dictionary
     for count in range(100):
         start_time = time.time()
         steps = a_star_alg(heuristic)
