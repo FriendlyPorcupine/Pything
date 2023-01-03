@@ -8,6 +8,12 @@ class Puzzle:
     def __init__(self, puzzle_array):
         self.puzzle_array = puzzle_array
 
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return False
+
+        return np.array_equal(self.puzzle_array, other.puzzle_array)
+
     def print_puzzle(self):
         """ Define a function to print the puzzle to the console """
 

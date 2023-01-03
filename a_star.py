@@ -13,6 +13,12 @@ class Node:
         self.g = 0  # Gewichtung
         self.f = 0  # Heuristic + Gewichtung
 
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return False
+
+        return self.puzzle == other.puzzle
+
 
 # m = Manhattan
 # h = Hamming
@@ -30,7 +36,7 @@ def a_star_alg(heuristic):
         current_node = open_list[0]
         current_index = 0
         for count, node in enumerate(open_list):
-            print(count, ':', 'node:', node.f, 'current_node:', current_node.f)
+            #print(count, ':', 'node:', node.f, 'current_node:', current_node.f)
             if node.f < current_node.f:
                 current_node = node
                 current_index = count
