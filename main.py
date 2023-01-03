@@ -1,7 +1,7 @@
 # import the puzzle class
 import a_star
 import puzzle_class as puzzle
-import time
+import statistics
 
 
 def play_game():
@@ -22,21 +22,41 @@ def play_game():
 if __name__ == '__main__':
     #  play_game()
 
-    print('Manhattan: ')
-    start_time = time.time()
-    print('average_Nodes:', a_star.average_expanded_nodes('m'))
-    end_time = time.time()
-    Manhattan_time = end_time - start_time
-    print('average_Time:', round(Manhattan_time, 2))
+    one_hundred_tries_manhattan = a_star.expanded_nodes_time('m')
+    one_hundred_tries_hamming = a_star.expanded_nodes_time('h')
 
-    '''
-    print('-----------------------\n')
+    node_list_manhattan = []
+    node_list_hamming = []
 
-    print('Hamming:')
-    start_time = time.time()
-    print('average_Nodes:', a_star.average_expanded_nodes('h'))
-    end_time = time.time()
-    Hamming_time = end_time - start_time
-    print('average_Time:', round(Hamming_time, 2))
-    '''
+    time_list_manhattan = []
+    time_list_hamming = []
+
+    for i in one_hundred_tries_manhattan:
+        node_list_manhattan.append(list(one_hundred_tries_manhattan.values())[i][0])
+        node_list_hamming.append(list(one_hundred_tries_hamming.values())[i][0])
+
+        time_list_manhattan.append(list(one_hundred_tries_manhattan.values())[i][1])
+        time_list_hamming.append(list(one_hundred_tries_hamming.values())[i][1])
+
+    mean_nodes_manhattan = round(statistics.mean(node_list_manhattan), 2)
+    deviation_nodes_manhattan = round(statistics.stdev(node_list_manhattan), 2)
+
+    mean_nodes_hamming = round(statistics.mean(node_list_hamming), 2)
+    deviation_nodes_hamming = round(statistics.stdev(node_list_hamming), 2)
+
+    mean_time_manhattan = round(statistics.mean(time_list_manhattan), 2)
+    deviation_time_manhattan = round(statistics.stdev(time_list_manhattan), 2)
+
+    mean_time_hamming = round(statistics.mean(time_list_hamming), 2)
+    deviation_time_hamming = round(statistics.stdev(time_list_hamming), 2)
+
+    print('Manhattan:\nNodes:', mean_nodes_manhattan, 'with standard deviation', deviation_nodes_manhattan)
+    print('Time:', mean_time_manhattan, 'with standard deviation', deviation_time_manhattan, end='\n')
+
+    print('Hamming:\nNodes:', mean_nodes_hamming, 'with standard deviation', deviation_nodes_hamming)
+    print('Time:', mean_time_hamming, 'with standard deviation', deviation_time_hamming)
+
+
+
+
 

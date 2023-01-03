@@ -1,5 +1,6 @@
 import queue as q
 import puzzle_class
+import time
 
 
 # node class for all the different states of the 8-Puzzle
@@ -121,14 +122,15 @@ def a_star_alg(heuristic):
                 open_list.put((child.f, child))
 
 
-def average_expanded_nodes(heuristic):
-    nodes_expanded = []
-    for count in range(100):
+def expanded_nodes_time(heuristic):
+    nodes_expanded_time = {}
+
+    for count in range(3):
+        start_time = time.time()
         steps = a_star_alg(heuristic)
-        nodes_expanded.append(steps)
+        end_time = time.time()
 
-        print(steps, count)
-
-    average = sum(nodes_expanded) / len(nodes_expanded)
-    return nodes_expanded
-    # return round(average, 2)
+        runTime = round(end_time - start_time, 2)
+        nodes_expanded_time.update({count: (steps, runTime)})
+        # print(count, ':', steps, runTime)
+    return nodes_expanded_time
