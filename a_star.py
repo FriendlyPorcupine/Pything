@@ -1,5 +1,4 @@
-import numpy as np
-
+import queue as q
 import puzzle_class
 
 
@@ -7,37 +6,46 @@ import puzzle_class
 class Node:
     # constructor
     def __init__(self, puzzle, parent=None, action=None):
+        # the state of the puzzle
         self.puzzle = puzzle
+        # the parent of the node (how the puzzle looked like before the last move was made)
         self.parent = parent
+        # the last move that was made to archive this state
         self.action = action
 
-        self.h = 0  # Heuristic
-        self.g = 0  # Gewichtung
-        self.f = 0  # Heuristic + Gewichtung
+        # heuristic
+        self.h = 0
+        # cost
+        self.g = 0
+        # heuristic + cost
+        self.f = 0
+
+    # to make it possible to compare the f values in the priority queue
+    def __lt__(self, other):
+        return self.f < other.f
 
 
-# m = Manhattan
-# h = Hamming
+# a star algorithm that takes the parameters "m" and "h" for the two different heuristics - m = Manhattan, h = Hamming
 def a_star_alg(heuristic):
+    # initializing a random puzzle
     puzzle = puzzle_class.Puzzle(puzzle_class.init_puzzle())
+    # creating the first node with the randomly created puzzle
     start_node = Node(puzzle)
-    # start_node.puzzle.print_puzzle()
-    open_list = []
-    closed_list = []
+    # creating a priority queue where all the children nodes will be added to
+    open_list = q.PriorityQueue()
+    # a list where all the expanded nodes will be added
+    closed_list = set()
+    # the possible directions the empty tile can move to
     directions = ['up', 'down', 'left', 'right']
+    # the start node is added to the priority queue, with the priority f
+    open_list.put((start_node.f, start_node))
 
-    open_list.append(start_node)
+    # while the priority queue is not empty
+    while not open_list.empty():
+        # the
+        current_node = open_list.get()[1]
 
-    while len(open_list) > 0:
-        current_node = open_list[0]
-        current_index = 0
-        for count, node in enumerate(open_list):
-            if node.f < current_node.f:
-                current_node = node
-                current_index = count
-        # current_node.puzzle.print_puzzle()
-        # print(current_node.h)
-        closed_list.append(open_list.pop(current_index))
+        closed_list.add(current_node)
 
         if not current_node.puzzle.puzzle_unordered():
             path = []
@@ -45,8 +53,8 @@ def a_star_alg(heuristic):
                 path.append(current_node)
                 current_node = current_node.parent
 
-            #for move in path[::-1]:
-                #print(move.puzzle.print_puzzle())
+            # for move in path[::-1]:
+            # print(move.puzzle.print_puzzle())
             return len(closed_list)
 
         children = []
@@ -65,8 +73,8 @@ def a_star_alg(heuristic):
                 children.append(new_node)
 
         """
-        for child in children:
-            for child_in_closed_list in closed_list:
+        :for child in children:
+            for child_in_closed_list in closed_list
                 if child.puzzle == child_in_closed_list.puzzle:
                     continue
 
@@ -94,25 +102,28 @@ def a_star_alg(heuristic):
                 child.h = child.puzzle.hamming_heuristic()
             child.f = child.g + child.h
 
+            """""
             for child_in_closed_list in closed_list:
                 if np.array_equal(child.puzzle.puzzle_array,
                                   child_in_closed_list.puzzle.puzzle_array) and child.g == child_in_closed_list.g:
                     flag = False
-                    # print("copy")
+                    print("copy")
 
-            for node in open_list:
+
+            for node in open_list.queue:
                 if np.array_equal(child.puzzle.puzzle_array,
-                                  node.puzzle.puzzle_array) and child.g > node.g:  # child.puzzle == node.puzzle and child.g > node.g
+                                  node[1].puzzle.puzzle_array) and child.g > node[1].g:  # child.puzzle == node.puzzle and child.g > node.g
                     flag = False
-                    # print("duplicate in open list but long")
+                    print("duplicate in open list but long")
+            """
 
             if flag:
-                open_list.append(child)
+                open_list.put((child.f, child))
 
 
 def average_expanded_nodes(heuristic):
     nodes_expanded = []
-    for count in range(10):
+    for count in range(100):
         steps = a_star_alg(heuristic)
         nodes_expanded.append(steps)
 
