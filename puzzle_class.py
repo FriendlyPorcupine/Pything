@@ -11,14 +11,14 @@ class Puzzle:
     def print_puzzle(self):
         """ Define a function to print the puzzle to the console """
 
-        puzzleToPrint = self.puzzle_array
+        puzzle_to_print = self.puzzle_array
         for i in range(3):  # iterate ofer the rows of the puzzle
             print(' +---+---+---+')
             for j in range(3):  # iterate ofer the cols of the puzzle
-                if puzzleToPrint[i][j] == 0:  # print the value of the tile
+                if puzzle_to_print[i][j] == 0:  # print the value of the tile
                     print(' |', ' ', end='')
                 else:
-                    print(' |', puzzleToPrint[i][j], end='')  # print nothing if value is zero (0) -> empty tile
+                    print(' |', puzzle_to_print[i][j], end='')  # print nothing if value is zero (0) -> empty tile
             print(' |')
         print(' +---+---+---+')
 
@@ -37,11 +37,11 @@ class Puzzle:
         """ Define a function to check if the puzzle is solved
 
         :return: Boolean """
-        puzzleInOrder = np.arange(9)  # Make an array with values in the correct order to compare to
+        puzzle_in_order = np.arange(9)  # Make an array with values in the correct order to compare to
         puzzle = self.puzzle_array.reshape(9)  # Reshape 2D array puzzle to simple array
 
-        for i in puzzleInOrder:  # iterate ofer the hole array
-            if puzzle[i] != puzzleInOrder[i]:  # check the values of puzzle match the array with correct order, if not..
+        for i in puzzle_in_order:  # iterate ofer the hole array
+            if puzzle[i] != puzzle_in_order[i]:  # check the values of puzzle match the array with correct order, if not..
                 return True
         return False
 
@@ -98,13 +98,13 @@ class Puzzle:
 
         :return: integer -> heuristic """
         puzzle = self.puzzle_array
-        goalPuzzle = np.arange(9).reshape((3, 3))  # make correct puzzle to compare to
+        goal_puzzle = np.arange(9).reshape((3, 3))  # make correct puzzle to compare to
         heuristic = 0
         for i in range(1, 9):
             # Get index of tile with number i for both puzzles
-            indexPuzzle, indexGoal = tuple(np.argwhere(puzzle == i)[0]), tuple(np.argwhere(goalPuzzle == i)[0])
+            index_puzzle, index_goal = tuple(np.argwhere(puzzle == i)[0]), tuple(np.argwhere(goal_puzzle == i)[0])
 
-            steps = abs(indexGoal[0] - indexPuzzle[0]) + abs(indexGoal[1] - indexPuzzle[1])  # calculate needed steps
+            steps = abs(index_goal[0] - index_puzzle[0]) + abs(index_goal[1] - index_puzzle[1])  # calculate needed steps
             heuristic += steps  # add all steps together
             # print(i, ':', indexPuzzle, '->', indexGoal, '=', steps, '|', heuristic)  # just for now
         return heuristic
@@ -131,7 +131,7 @@ def init_puzzle():
     """ Define a function to initialize the puzzle
 
     :return: 2D Array with random puzzle """
-    puzzle = np.arange(9)  # Create a array to represent the puzzle
+    puzzle = np.arange(9)  # Create an array to represent the puzzle
     np.random.shuffle(puzzle)  # Shuffle the puzzle to create a random starting configuration
 
     while not puzzle_solvable(puzzle):  # check if the puzzle is solvable
@@ -146,11 +146,10 @@ def puzzle_solvable(puzzle):
 
     :param puzzle: 2D Array
     :return: boolean """
-    inverseCount = 0
+    inverse_count = 0
     puzzle = puzzle.reshape(9)  # reshape the 2D Array into a 1D Array
     for i in range(9):
         for j in range(i + 1, 9):  # compare i with number to the right of i
             if puzzle[i] > puzzle[j] and (puzzle[j] != 0 and puzzle[i] != 0):
-                inverseCount += 1  # if the 1st number is bigger than the 2nd number, increase counter
-    return bool((inverseCount % 2) == 0)  # if the counter is a even the puzzle is solvable
-
+                inverse_count += 1  # if the 1st number is bigger than the 2nd number, increase counter
+    return bool((inverse_count % 2) == 0)  # if the counter is an even the puzzle is solvable
