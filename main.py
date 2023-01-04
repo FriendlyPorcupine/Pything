@@ -36,6 +36,8 @@ if __name__ == '__main__':
 
     merged_dictionary = merge_dictionary(one_hundred_tries_manhattan, one_hundred_tries_hamming)
 
+    pd.set_option('display.max_rows', 100)
+
     df = pd.DataFrame.from_dict(merged_dictionary).T
     df.columns = ['Manhattan: (Nodes, Time)', 'Hamming: (Nodes, Time)']
 
