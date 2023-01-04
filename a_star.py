@@ -27,7 +27,7 @@ class Node:
 
 
 # a star algorithm that takes the parameters "m" and "h" for the two different heuristics - m = Manhattan, h = Hamming
-def a_star_alg(heuristic, random_puzzle):
+def a_star_alg(heuristic, random_puzzle): # O ((a+bx²+cx³) * log n)
     # initializing a random puzzle
     puzzle = random_puzzle
     # creating the first node with the randomly created puzzle
