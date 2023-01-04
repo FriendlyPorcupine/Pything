@@ -19,9 +19,6 @@ def play_game():
     print('The puzzle is solved')
     game.print_puzzle()
 
-    print(one_hundred_tries_manhattan)
-    print(one_hundred_tries_hamming)
-
 
 def merge_dictionary(dict_1, dict_2):
     new_dictionary = {**dict_1, **dict_2}
