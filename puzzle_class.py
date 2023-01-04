@@ -8,12 +8,6 @@ class Puzzle:
     def __init__(self, puzzle_array):
         self.puzzle_array = puzzle_array
 
-    def __eq__(self, other):
-        if not isinstance(other, self.__class__):
-            return False
-
-        return np.array_equal(self.puzzle_array, other.puzzle_array)
-
     def print_puzzle(self):
         """ Define a function to print the puzzle to the console """
 
@@ -31,10 +25,9 @@ class Puzzle:
     def find_empty(self):
         """ Define a function to find the position of the empty tile
 
-        :param puzzle: 2D Array
         :return: index of empty tile """
 
-        puzzle = copy.deepcopy(self.puzzle_array)
+        puzzle = self.puzzle_array
         for i in range(3):  # iterate ofer the rows of the puzzle
             for j in range(3):  # iterate ofer the cols of the puzzle
                 if puzzle[i][j] == 0:  # find tile with value zero (0) & remember position in the 2D array
@@ -104,7 +97,7 @@ class Puzzle:
         """ Define a function to calculate the heuristic with "Manhattan"
 
         :return: integer -> heuristic """
-        puzzle = copy.deepcopy(self.puzzle_array)
+        puzzle = self.puzzle_array
         goalPuzzle = np.arange(9).reshape((3, 3))  # make correct puzzle to compare to
         heuristic = 0
         for i in range(1, 9):
@@ -121,7 +114,7 @@ class Puzzle:
         array - puzzle - compared to the ideal array - goal_puzzle -
 
         :return: heuristic """
-        puzzle = copy.deepcopy(self.puzzle_array).reshape(9)
+        puzzle = self.puzzle_array.reshape(9)
         goal_puzzle = np.arange(9)  # Create the ideally ordered puzzle
         heuristic = 0  # Heuristic-Counter
 
