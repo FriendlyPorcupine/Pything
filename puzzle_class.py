@@ -148,3 +148,4 @@ def puzzle_solvable(puzzle):
             if puzzle[i] > puzzle[j] and (puzzle[j] != 0 and puzzle[i] != 0):
                 inverse_count += 1  # if the 1st number is bigger than the 2nd number, increase counter
     return bool((inverse_count % 2) == 0)  # if the counter is an even the puzzle is solvable
+
