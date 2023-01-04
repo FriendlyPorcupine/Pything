@@ -2,6 +2,7 @@
 import a_star
 import puzzle_class as puzzle
 import statistics
+import pandas as pd
 
 
 def play_game():
@@ -19,11 +20,26 @@ def play_game():
     game.print_puzzle()
 
 
+def merge_dictionary(dict_1, dict_2):
+    newDictionary = {**dict_1, **dict_2}
+    for key, value in newDictionary.items():
+        if key in dict_1 and key in dict_2:
+            newDictionary[key] = [value, dict_1[key]]
+    return newDictionary
+
+
 if __name__ == '__main__':
     #  play_game()
 
     one_hundred_tries_manhattan = a_star.expanded_nodes_time('m')
     one_hundred_tries_hamming = a_star.expanded_nodes_time('h')
+
+    merged_dictionary = merge_dictionary(one_hundred_tries_hamming, one_hundred_tries_manhattan)
+
+    df = pd.DataFrame.from_dict(merged_dictionary).T
+    df.columns = ['Manhattan: (Nodes, Time)', 'Hamming: (Nodes, Time)']
+
+    print(df, end='\n\n')
 
     node_list_manhattan = []
     node_list_hamming = []
@@ -61,11 +77,13 @@ if __name__ == '__main__':
           '\nThe puzzle with the max time and nodes needed:', max_manhattan[0], 'Nodes', 'and', max_manhattan[1], 'sec',
           '\nThe puzzle with the min time and nodes needed:', min_manhattan[0], 'Nodes', 'and', min_manhattan[1], 'sec',
           '\n -> mean Nodes expanded:', mean_nodes_manhattan, 'with standard deviation', deviation_nodes_manhattan,
-          '\n -> mean Time needed:', mean_time_manhattan, 'with standard deviation', deviation_time_manhattan, end='\n\n')
+          '\n -> mean Time needed:', mean_time_manhattan, 'with standard deviation', deviation_time_manhattan,
+          end='\n\n')
 
     print('Hamming:'
           '\nThe A*-Algorithm using the Hamming-Heuristic expanded a total of', sum(node_list_hamming), 'Nodes',
           '\nThe puzzle with the max time and nodes needed:', max_hamming[0], 'Nodes', 'and', max_hamming[1], 'sec',
           '\nThe puzzle with the min time and nodes needed:', min_hamming[0], 'Nodes', 'and', min_hamming[1], 'sec',
           '\n -> mean Nodes expanded:', mean_nodes_hamming, 'with standard deviation', deviation_nodes_hamming,
-          '\n -> mean Time needed:', mean_time_hamming, 'with standard deviation', deviation_time_hamming)
+          '\n -> mean Time needed:', mean_time_hamming, 'with standard deviation', deviation_time_hamming, end='\n\n')
+
