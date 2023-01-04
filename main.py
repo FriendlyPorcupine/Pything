@@ -41,10 +41,14 @@ if __name__ == '__main__':
 
     df = pd.DataFrame.from_dict(merged_dictionary).T
     df.columns = ['Manhattan: (Nodes, Time)', 'Hamming: (Nodes, Time)']
+    df
+
+    print(merged_dictionary)
 
     print(df, end='\n\n')
 
-    node_list_manhattan = []
+    '''
+     node_list_manhattan = []
     node_list_hamming = []
 
     time_list_manhattan = []
@@ -89,3 +93,6 @@ if __name__ == '__main__':
           '\nThe puzzle with the min time and nodes needed:', min_hamming[0], 'Nodes', 'and', min_hamming[1], 'sec',
           '\n -> mean Nodes expanded:', mean_nodes_hamming, 'with standard deviation', deviation_nodes_hamming,
           '\n -> mean Time needed:', mean_time_hamming, 'with standard deviation', deviation_time_hamming, end='\n\n')
+    '''
+
+
