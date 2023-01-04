@@ -11,14 +11,13 @@ class Puzzle:
     def print_puzzle(self):
         """ Define a function to print the puzzle to the console """
 
-        puzzleToPrint = self.puzzle_array
         for i in range(3):  # iterate ofer the rows of the puzzle
             print(' +---+---+---+')
             for j in range(3):  # iterate ofer the cols of the puzzle
-                if puzzleToPrint[i][j] == 0:  # print the value of the tile
+                if self.puzzle_array[i][j] == 0:
                     print(' |', ' ', end='')
-                else:
-                    print(' |', puzzleToPrint[i][j], end='')  # print nothing if value is zero (0) -> empty tile
+                else:  # print the value of the tile
+                    print(' |', self.puzzle_array[i][j], end='')  # print nothing if value is zero (0) -> empty tile
             print(' |')
         print(' +---+---+---+')
 
@@ -27,10 +26,9 @@ class Puzzle:
 
         :return: index of empty tile """
 
-        puzzle = self.puzzle_array
         for i in range(3):  # iterate ofer the rows of the puzzle
             for j in range(3):  # iterate ofer the cols of the puzzle
-                if puzzle[i][j] == 0:  # find tile with value zero (0) & remember position in the 2D array
+                if self.puzzle_array[i][j] == 0:  # find tile with value zero (0) & remember position in the 2D array
                     return i, j
 
     def puzzle_unordered(self):
@@ -97,16 +95,14 @@ class Puzzle:
         """ Define a function to calculate the heuristic with "Manhattan"
 
         :return: integer -> heuristic """
-        puzzle = self.puzzle_array
         goalPuzzle = np.arange(9).reshape((3, 3))  # make correct puzzle to compare to
         heuristic = 0
         for i in range(1, 9):
             # Get index of tile with number i for both puzzles
-            indexPuzzle, indexGoal = tuple(np.argwhere(puzzle == i)[0]), tuple(np.argwhere(goalPuzzle == i)[0])
+            indexPuzzle, indexGoal = tuple(np.argwhere(self.puzzle_array == i)[0]), tuple(np.argwhere(goalPuzzle == i)[0])
 
             steps = abs(indexGoal[0] - indexPuzzle[0]) + abs(indexGoal[1] - indexPuzzle[1])  # calculate needed steps
             heuristic += steps  # add all steps together
-            # print(i, ':', indexPuzzle, '->', indexGoal, '=', steps, '|', heuristic)  # just for now
         return heuristic
 
     def hamming_heuristic(self):
@@ -123,7 +119,6 @@ class Puzzle:
         for i in range(1, 9):
             if goal_puzzle[i] != puzzle[i]:
                 heuristic += 1
-
         return heuristic
 
 
