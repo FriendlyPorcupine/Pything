@@ -101,6 +101,6 @@ def expanded_nodes_time(heuristic):
         steps = a_star_alg(heuristic, puzzle)
         end_time = time.time()
 
-        run_time = round(end_time - start_time, 2)
+        run_time = round(end_time - start_time, 3)
         nodes_expanded_time.update({count+1: (steps, run_time)})
     return nodes_expanded_time
