@@ -27,39 +27,35 @@ def merge_dictionary(dict_1, dict_2):
     new_dictionary = {**dict_1, **dict_2}
     for key, value in new_dictionary.items():
         if key in dict_1 and key in dict_2:
-            new_dictionary[key] = [value, dict_1[key]]
+            new_dictionary[key] = [dict_1[key], dict_2[key]]
     return new_dictionary
 
 
 if __name__ == '__main__':
-    #  play_game()
+    # play_game()
 
     one_hundred_tries_manhattan = a_star.expanded_nodes_time('m')
     one_hundred_tries_hamming = a_star.expanded_nodes_time('h')
 
-    merged_dictionary = merge_dictionary(one_hundred_tries_hamming, one_hundred_tries_manhattan)
+    merged_dictionary = merge_dictionary(one_hundred_tries_manhattan, one_hundred_tries_hamming)
 
     df = pd.DataFrame.from_dict(merged_dictionary).T
     df.columns = ['Manhattan: (Nodes, Time)', 'Hamming: (Nodes, Time)']
-    df
-
-    print(merged_dictionary)
 
     print(df, end='\n\n')
 
-    '''
-     node_list_manhattan = []
+    node_list_manhattan = []
     node_list_hamming = []
 
     time_list_manhattan = []
     time_list_hamming = []
 
     for i in one_hundred_tries_manhattan:
-        node_list_manhattan.append(list(one_hundred_tries_manhattan.values())[i][0])
-        node_list_hamming.append(list(one_hundred_tries_hamming.values())[i][0])
+        node_list_manhattan.append(list(one_hundred_tries_manhattan.values())[i-1][0])
+        node_list_hamming.append(list(one_hundred_tries_hamming.values())[i-1][0])
 
-        time_list_manhattan.append(list(one_hundred_tries_manhattan.values())[i][1])
-        time_list_hamming.append(list(one_hundred_tries_hamming.values())[i][1])
+        time_list_manhattan.append(list(one_hundred_tries_manhattan.values())[i-1][1])
+        time_list_hamming.append(list(one_hundred_tries_hamming.values())[i-1][1])
 
     mean_nodes_manhattan = round(statistics.mean(node_list_manhattan), 2)
     deviation_nodes_manhattan = round(statistics.stdev(node_list_manhattan), 2)
@@ -93,6 +89,3 @@ if __name__ == '__main__':
           '\nThe puzzle with the min time and nodes needed:', min_hamming[0], 'Nodes', 'and', min_hamming[1], 'sec',
           '\n -> mean Nodes expanded:', mean_nodes_hamming, 'with standard deviation', deviation_nodes_hamming,
           '\n -> mean Time needed:', mean_time_hamming, 'with standard deviation', deviation_time_hamming, end='\n\n')
-    '''
-
-

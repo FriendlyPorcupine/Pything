@@ -93,10 +93,10 @@ def expanded_nodes_time(heuristic):
     one_hundred_puzzles = []
     # loop that goes through 100 iterations with different 8-Puzzles that are solved, run time and expanded nodes are
     # saved in nodes_expanded_time dictionary
-    for count in range(100):
+    for count in range(5):
         one_hundred_puzzles.append(puzzle_class.Puzzle(puzzle_class.init_puzzle()))
 
-    for count , puzzle in enumerate(one_hundred_puzzles):
+    for count, puzzle in enumerate(one_hundred_puzzles):
         start_time = time.time()
         steps = a_star_alg(heuristic, puzzle)
         end_time = time.time()
