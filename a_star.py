@@ -84,6 +84,7 @@ def a_star_alg(heuristic, randomPuzzle):
 
                 # the new nodes that were created are added into the priority queue with the f value as their priority
                 open_list.put((new_node.f, new_node))
+    return 0
 
 
 def expanded_nodes_time(heuristic):

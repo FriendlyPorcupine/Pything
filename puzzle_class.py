@@ -161,5 +161,3 @@ def puzzle_solvable(puzzle):
                 inverseCount += 1  # if the 1st number is bigger than the 2nd number, increase counter
     return bool((inverseCount % 2) == 0)  # if the counter is a even the puzzle is solvable
 
-# To test the functions
-# if __name__ == '__main__':
