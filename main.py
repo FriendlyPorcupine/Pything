@@ -19,13 +19,16 @@ def play_game():
     print('The puzzle is solved')
     game.print_puzzle()
 
+    print(one_hundred_tries_manhattan)
+    print(one_hundred_tries_hamming)
+
 
 def merge_dictionary(dict_1, dict_2):
-    newDictionary = {**dict_1, **dict_2}
-    for key, value in newDictionary.items():
+    new_dictionary = {**dict_1, **dict_2}
+    for key, value in new_dictionary.items():
         if key in dict_1 and key in dict_2:
-            newDictionary[key] = [value, dict_1[key]]
-    return newDictionary
+            new_dictionary[key] = [value, dict_1[key]]
+    return new_dictionary
 
 
 if __name__ == '__main__':
@@ -86,4 +89,3 @@ if __name__ == '__main__':
           '\nThe puzzle with the min time and nodes needed:', min_hamming[0], 'Nodes', 'and', min_hamming[1], 'sec',
           '\n -> mean Nodes expanded:', mean_nodes_hamming, 'with standard deviation', deviation_nodes_hamming,
           '\n -> mean Time needed:', mean_time_hamming, 'with standard deviation', deviation_time_hamming, end='\n\n')
-
